@@ -32,6 +32,13 @@
             app:srcCompat="@drawable/ic_add_white_24dp"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/wifi_on_off"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_margin="@dimen/fab_margin"
+            />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/disconnect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

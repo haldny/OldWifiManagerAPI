@@ -1,5 +1,6 @@
 package com.haldny.oldwifimanagerapi
 
+import android.app.job.JobScheduler
 import android.content.Context
 import android.net.wifi.WifiConfiguration
 import android.net.wifi.WifiManager
@@ -20,6 +21,7 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 
 import android.widget.EditText
+import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,6 +38,12 @@ class MainActivity : AppCompatActivity() {
 
         fab.setOnClickListener { view ->
             openDialog(view)
+        }
+
+        setWifiStatus(false)
+
+        wifi_on_off.setOnClickListener {
+            setWifiStatus(true)
         }
 
         disconnect.setOnClickListener {
@@ -84,6 +92,21 @@ class MainActivity : AppCompatActivity() {
 
         val alertDialogAndroid = alertDialogBuilderUserInput.create()
         alertDialogAndroid.show()
+    }
+
+    private fun setWifiStatus(wifiWasClicked: Boolean) {
+        val wifiManager = getSystemService(Context.WIFI_SERVICE) as WifiManager
+
+        if (wifiWasClicked) {
+            wifiManager.isWifiEnabled = !wifiManager.isWifiEnabled
+        }
+
+        if (wifiManager.isWifiEnabled) {
+            wifi_on_off.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_wifi_black_24dp))
+        } else {
+            wifi_on_off.setImageDrawable(ContextCompat.getDrawable(this,
+                R.drawable.ic_portable_wifi_off_black_24dp))
+        }
     }
 
     private fun addNetwork(ssid: EditText, password: EditText) {
